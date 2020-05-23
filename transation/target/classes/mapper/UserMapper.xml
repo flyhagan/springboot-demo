@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hg.transation.mapper.UserMapper">
+
+    <!-- 查询所有 -->
+    <select id="findAll" resultType="com.hg.transation.entity.User">
+        SELECT * FROM tb_user
+    </select>
+    <insert id="saveBatch" parameterType="com.hg.transation.entity.User">
+        insert into tb_user (
+        id,username,password
+        )
+        values
+        <foreach collection="param"  item="veh" separator=",">
+            (
+            #{veh.id},#{veh.username}, #{veh.password}
+            )
+        </foreach>
+    </insert>
+</mapper>

@@ -1,0 +1,75 @@
+server:
+  port: 8080
+
+spring:
+  redis:
+    #redis数据库，默认是0
+    database: 1
+    #redis服务器地址
+    host: localhost
+    #redis服务端口，默认6379
+    port: 6379
+    #redis密码，默认为空
+    password:
+  datasource:
+    name: springboot
+    type: com.alibaba.druid.pool.DruidDataSource
+    #druid相关配置
+    druid:
+      #监控统计拦截的filters
+      filter: stat
+      #mysql驱动
+      driver-class-name: com.mysql.jdbc.Driver
+      #基本属性
+      url: jdbc:mysql://localhost:3306/mybatis?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=GMT
+      username: root
+      password: root
+      #配置初始化大小/最小/最大
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      #获取连接等待超时时间
+      max-wait: 60000
+      #间隔多久进行一次检测，检测需要关闭的空闲连接
+      time-between-eviction-runs-millis: 60000
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    encoding: UTF-8
+    mode: LEGACYHTML5
+    cache: false
+
+  #文件上传相关设置
+  servlet:
+    multipart:
+      max-file-size: 100000000
+      max-request-size: 1000000000
+
+  #devtools插件
+  devtools:
+    livereload:
+      enabled: true #是否支持livereload
+      port: 35729
+    restart:
+      enabled: true #是否支持热部署
+
+  #spring-aop配置
+  aop:
+    #启用@Aspectj注解驱动的切面，允许Spring创建基于类的代理
+    auto: true
+    proxy-target-class: true
+
+
+#mybatis配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.hg.transation.entity
+
+#mybaatis分页插件pagehelper设置
+pagehelper:
+  pagehelperDialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  #params: count=countSql
